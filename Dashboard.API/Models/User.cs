@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace Dashboard.API.Models
 {
     public class User
@@ -11,6 +12,8 @@ namespace Dashboard.API.Models
         public string PostalCode {get;set;}
         public string Email {get;set;}
         public string Username {get; set;}
+
+        public List<Patient> Patients {get; set;}
 
     }
 }
