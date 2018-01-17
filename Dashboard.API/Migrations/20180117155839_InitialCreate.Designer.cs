@@ -11,8 +11,8 @@ using System;
 namespace Dashboard.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180116215759_Initial")]
-    partial class Initial
+    [Migration("20180117155839_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,9 +40,13 @@ namespace Dashboard.API.Migrations
 
                     b.Property<int>("SystolicBP");
 
+                    b.Property<int?>("UserId");
+
                     b.Property<int>("Weight");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Patients");
                 });
@@ -71,6 +75,13 @@ namespace Dashboard.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Dashboard.API.Models.Patient", b =>
+                {
+                    b.HasOne("Dashboard.API.Models.User")
+                        .WithMany("Patients")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

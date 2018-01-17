@@ -3,24 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Dashboard.API.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dashboard.API.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private readonly DataContext _context;
+
+        public ValuesController(DataContext context)
+        {
+            _context = context;
+
+        }
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task <IActionResult> GetUsers()
         {
-            return new string[] { "value1", "value2" };
+            var users = await _context.Users.ToListAsync();
+            return Ok(users);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task <IActionResult> GetUser(int id)
         {
-            return "value";
+            var user =  await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return Ok(user);
         }
 
         // POST api/values
