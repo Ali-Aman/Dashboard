@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Http} from '@angular/http';
 
 @Component({
   selector: 'app-user',
@@ -9,7 +9,7 @@ import {HttpClient} from '@angular/common/http';
 export class UserComponent implements OnInit {
 
 users: any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: Http) { }
 
     ngOnInit() {
 
